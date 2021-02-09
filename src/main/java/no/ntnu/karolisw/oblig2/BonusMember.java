@@ -1,8 +1,6 @@
 package no.ntnu.karolisw.oblig2;
 
-import java.sql.SQLOutput;
 import java.time.LocalDate;
-import java.util.concurrent.ExecutionException;
 
 public class BonusMember {
     private int memberNumber;
@@ -44,13 +42,15 @@ public class BonusMember {
     public String getPassword() {
         return password;
     }
+
     //Denne metoden skal returnere true dersom passordet i parameteren password matcher passordet til objektet
     public boolean checkPassword(String password){
         return this.password.equals(password);
-        // evt: return this.password.contains(password);
     }
+
     public void registerBonusPoints(int newPoints){
-        this.membership.registerPoints(getBonusPointsBalance(),newPoints);
+
+        this.membership.registerPoints(this.getBonusPointsBalance(),newPoints);
         checkAndSetMembership();
     }
 
@@ -71,22 +71,45 @@ public class BonusMember {
 
     //støttemetoden som er del av konstruktør og registerBonusPoints
     public void checkAndSetMembership() {
+//        System.out.println("This user has a: " + this.membership.getMembershipName());
         if (this.getBonusPointsBalance() >= GOLD_LIMIT) {
             if (!(this.membership instanceof GoldMembership)) {
                 this.membership = new GoldMembership();
+                System.out.println("This user has been upgraded to Gold Membership");
+            }
+            else{
+                System.out.println("This membership is a: "+ this.getMembership().toString());
             }
         }
         else if (this.getBonusPointsBalance() >= SILVER_LIMIT && this.getBonusPointsBalance() < GOLD_LIMIT) {
             if (!(this.membership instanceof SilverMembership)) {
                 this.membership = new SilverMembership();
+                System.out.println("This user has been upgraded to Silver Membership");
+            }
+            else{
+                System.out.println("This membership is a: "+ this.getMembership().toString());
             }
         }
         else if(this.getBonusPointsBalance() < SILVER_LIMIT){
             if (!(this.membership instanceof BasicMembership)) {
                 this.membership = new BasicMembership();
             }
+            else{
+                System.out.println("This membership is a: "+ this.getMembership().toString());
+            }
         }
-        System.out.println(this.membership.membershipName);
     }
 
+    @Override
+    public String toString() {
+        return "BonusMember{" +
+                "memberNumber=" + memberNumber +
+                ", enrolledDate=" + enrolledDate +
+                ", bonusPointsBalance=" + bonusPointsBalance +
+                ", name='" + name + '\'' +
+                ", eMailAddress='" + eMailAddress + '\'' +
+                ", password='" + password + '\'' +
+                ", membership=" + membership +
+                '}';
+    }
 }

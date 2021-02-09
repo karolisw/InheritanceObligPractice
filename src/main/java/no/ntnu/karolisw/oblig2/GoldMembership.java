@@ -1,6 +1,8 @@
 package no.ntnu.karolisw.oblig2;
 
-public class GoldMembership extends Membership{
+import no.ntnu.karolisw.oblig2.Membership;
+
+public class GoldMembership extends Membership {
     private int bonusPointBalance;
     private int newPoints;
     private String membershipName;
@@ -9,10 +11,8 @@ public class GoldMembership extends Membership{
 
     @Override
     public int registerPoints(int bonusPointBalance, int newPoints) {
-        this.bonusPointBalance = bonusPointBalance;
-        if(bonusPointBalance >= 75000 && bonusPointBalance < 90000){
+        if(this.bonusPointBalance >= 75000 && this.bonusPointBalance < 90000){
             return this.bonusPointBalance = Math.round(bonusPointBalance + newPoints*POINTS_SCALING_FACTOR_LEVEL_1);
-            //burde det stå this foran bonusPointBalance her?
         }
         else if(bonusPointBalance >= 90000){
             return this.bonusPointBalance = Math.round(bonusPointBalance + newPoints*POINTS_SCALING_FACTOR_LEVEL_2);
@@ -22,13 +22,16 @@ public class GoldMembership extends Membership{
         }
     }
 
-    @Override
-    public String getMembershipName() {
-        return "Gold Membership.";
+    public int getBonusPointBalance() {
+        return bonusPointBalance;
+    }
+
+    private void setBonusPointBalance(int bonusPointBalance) {
+        this.bonusPointBalance = bonusPointBalance;
     }
 
     @Override
-    public void setMembershipName(){
-        this.membershipName = "Gold membership";
+    public String getMembershipName() {
+        return "Gold Membership.";
     }
 }

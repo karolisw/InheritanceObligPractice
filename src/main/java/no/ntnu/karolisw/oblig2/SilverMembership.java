@@ -3,7 +3,7 @@ package no.ntnu.karolisw.oblig2;
 import javax.swing.*;
 
 public class SilverMembership extends Membership{
-    private int bonusPointBalance;
+    protected int bonusPointBalance;
     private int newPoints;
     private String membershipName;
     private final float POINTS_SCALING_FACTOR = 1.2f;
@@ -12,6 +12,10 @@ public class SilverMembership extends Membership{
     public int registerPoints(int bonusPointBalance, int newPoints) {
         int newBalance1 = Math.round(bonusPointBalance + newPoints*POINTS_SCALING_FACTOR);
         setBonusPointBalance(newBalance1);
+        return this.bonusPointBalance;
+    }
+
+    public int getBonusPointBalance() {
         return bonusPointBalance;
     }
 
@@ -24,8 +28,6 @@ public class SilverMembership extends Membership{
         return "Silver Membership";
     }
 
-    @Override
-    public void setMembershipName() {
-        this.membershipName = "Silver Membership";
-    }
+
 }
+

@@ -1,5 +1,7 @@
 package no.ntnu.karolisw.oblig2;
 
+import no.ntnu.karolisw.oblig2.Membership;
+
 public class BasicMembership extends Membership {
     private int bonusPointBalance;
     private int newPoints;
@@ -12,22 +14,21 @@ public class BasicMembership extends Membership {
     @Override
     public int registerPoints(int bonusPointBalance, int newPoints) {
       int newBalance = bonusPointBalance + newPoints;
-      return newBalance;
-
+      setBonusPointBalance(newBalance);
+      return this.bonusPointBalance;
     }
 
     public int getBonusPointBalance() {
         return bonusPointBalance;
     }
 
-    @Override
-    public String getMembershipName(){
-        return "Basic Membership";
+    public void setBonusPointBalance(int bonusPointBalance) {
+        this.bonusPointBalance = bonusPointBalance;
     }
 
     @Override
-    public void setMembershipName(){
-      this.membershipName = "Basic Membership";
+    public String getMembershipName(){
+        return "Basic Membership";
     }
 
 }

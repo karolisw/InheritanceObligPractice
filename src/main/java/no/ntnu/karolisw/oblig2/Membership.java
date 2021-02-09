@@ -1,13 +1,13 @@
 package no.ntnu.karolisw.oblig2;
 
 public abstract class Membership {
-    protected int bonusPointBalance;
-    protected int newPoints;
-    protected String membershipName;
+    private int bonusPointBalance;
+    private int newPoints;
+    private String membershipName;
 
-    public abstract int registerPoints(int bonusPointBalance, int newPoints);
-    public abstract String getMembershipName();
-    public abstract void setMembershipName();
+    protected abstract int registerPoints(int bonusPointBalance, int newPoints);
+    protected abstract String getMembershipName();
+
 
     @Override
     public String toString() {

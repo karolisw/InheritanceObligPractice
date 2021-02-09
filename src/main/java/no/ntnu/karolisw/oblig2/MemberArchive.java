@@ -25,7 +25,7 @@ import java.util.Map;
             this.fillRegisterWithTestdata();
         }
 
-        public boolean doesMemberExcist(Integer memberID){
+        public boolean doesMemberExcist(int memberID){
             return members.containsKey(memberID);
         }
 
@@ -56,13 +56,17 @@ import java.util.Map;
          *         {@code false} if not.
          */
         public boolean registerPoints(int memberNumber, int bonusPoints) {
+
             boolean success = false;
-            if(doesMemberExcist(memberNumber)){
-                members.get(memberNumber).registerBonusPoints(bonusPoints);
+            Membership memberInQuestion = members.get(memberNumber).getMembership();
+
+            if(members.containsKey(memberNumber)){
+                memberInQuestion.registerPoints(members.get(memberNumber).getBonusPointsBalance(),bonusPoints);
                 success = true;
             }
             return success;
         }
+
 
         /**
          * Lists all members to the console.
@@ -71,13 +75,22 @@ import java.util.Map;
             for(Integer memberNumber : members.keySet()){
                 String key = memberNumber.toString();
                 String value = members.get(memberNumber).toString();
+                System.out.println(key + value);
             }
         }
 
-        public int findPoints(Integer memberNumber, String password){
+        public int findPoints(int memberNumber, String password){
             BonusMember member = members.get(memberNumber);
-            if(member.getPassword().equals(password)){
+            if(member.checkPassword(password)){
                 return member.getBonusPointsBalance();
+            }
+            return -1;
+        }
+        public int findPoints2(int memberNumber, String password){
+            if(members.containsKey(memberNumber)){
+                if(members.get(memberNumber).checkPassword(password)){
+                    return members.get(memberNumber).getBonusPointsBalance();
+                }
             }
             return -1;
         }
@@ -85,8 +98,8 @@ import java.util.Map;
         /**
          * Fills the register with some arbitrary members, for testing purposes.
          */
-        private void fillRegisterWithTestdata() {
-            BonusMember member = new BonusMember(1, LocalDate.now(), 10000, "Olsen, Ole", "ole@olsen.biz");
+        public void fillRegisterWithTestdata() {
+            BonusMember member = new BonusMember(1, LocalDate.now(), 100000, "Olsen, Ole", "ole@olsen.biz");
             this.members.put(member.getMemberNumber(), member);
 
             BonusMember member2 = new BonusMember(2, LocalDate.now(), 15000, "Jensen, Jens", "jens@jensen.biz");
@@ -95,11 +108,12 @@ import java.util.Map;
             BonusMember member3 = new BonusMember(3, LocalDate.now(), 5000, "Lie, Linda", "linda@lie.no");
             this.members.put(member3.getMemberNumber(), member3);
 
-            BonusMember member4 = new BonusMember(4, LocalDate.now(), 30000, "Paulsen, Paul", "paul@paulsen.org");
+            BonusMember member4 = new BonusMember(4, LocalDate.now(), 45000, "Paulsen, Paul", "paul@paulsen.org");
             this.members.put(member4.getMemberNumber(), member4);
 
             BonusMember member5 = new BonusMember(5, LocalDate.now(), 75000, "FLo, Finn", "finn.flo@gmail.com");
             this.members.put(member5.getMemberNumber(), member5);
+            System.out.println("Register has been filled with test data ");
         }
 
 
