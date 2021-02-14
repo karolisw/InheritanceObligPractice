@@ -55,16 +55,13 @@ import java.util.Map;
          * @return {@code true} if bonuspoints were added successfully,
          *         {@code false} if not.
          */
-        public boolean registerPoints(int memberNumber, int bonusPoints) {
 
-            boolean success = false;
-            Membership memberInQuestion = members.get(memberNumber).getMembership();
-
+        public boolean registerPoints(int memberNumber, int bonusPoints){
             if(members.containsKey(memberNumber)){
-                memberInQuestion.registerPoints(members.get(memberNumber).getBonusPointsBalance(),bonusPoints);
-                success = true;
+                members.get(memberNumber).registerBonusPoints(bonusPoints);
+                return true;
             }
-            return success;
+            return false;
         }
 
 
@@ -73,9 +70,9 @@ import java.util.Map;
          */
         public void listAllMembers() {
             for(Integer memberNumber : members.keySet()){
-                String key = memberNumber.toString();
+                String key = memberNumber.toString() + "\n";
                 String value = members.get(memberNumber).toString();
-                System.out.println(key + value);
+                System.out.println(key + value + "\n");
             }
         }
 
@@ -99,19 +96,19 @@ import java.util.Map;
          * Fills the register with some arbitrary members, for testing purposes.
          */
         public void fillRegisterWithTestdata() {
-            BonusMember member = new BonusMember(1, LocalDate.now(), 100000, "Olsen, Ole", "ole@olsen.biz");
-            this.members.put(member.getMemberNumber(), member);
+            BonusMember member1 = new BonusMember(1, LocalDate.now(), 100000, "Olsen, Ole", "ole@olsen.biz");
+            this.members.put(member1.getMemberNumber(), member1);
 
-            BonusMember member2 = new BonusMember(2, LocalDate.now(), 15000, "Jensen, Jens", "jens@jensen.biz");
+            BonusMember member2 = new BonusMember(2, LocalDate.now(), 20000, "Jensen, Jens", "jens@jensen.biz");
             this.members.put(member2.getMemberNumber(), member2);
 
-            BonusMember member3 = new BonusMember(3, LocalDate.now(), 5000, "Lie, Linda", "linda@lie.no");
+            BonusMember member3 = new BonusMember(3, LocalDate.now(), 15000, "Lie, Linda", "linda@lie.no");
             this.members.put(member3.getMemberNumber(), member3);
 
-            BonusMember member4 = new BonusMember(4, LocalDate.now(), 45000, "Paulsen, Paul", "paul@paulsen.org");
+            BonusMember member4 = new BonusMember(4, LocalDate.now(), 9000, "Paulsen, Paul", "paul@paulsen.org");
             this.members.put(member4.getMemberNumber(), member4);
 
-            BonusMember member5 = new BonusMember(5, LocalDate.now(), 75000, "FLo, Finn", "finn.flo@gmail.com");
+            BonusMember member5 = new BonusMember(5, LocalDate.now(), 7500, "FLo, Finn", "finn.flo@gmail.com");
             this.members.put(member5.getMemberNumber(), member5);
             System.out.println("Register has been filled with test data ");
         }

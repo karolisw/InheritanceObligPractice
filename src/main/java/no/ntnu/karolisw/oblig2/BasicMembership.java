@@ -6,6 +6,12 @@ public class BasicMembership extends Membership {
     private int bonusPointBalance;
     private int newPoints;
     private String membershipName;
+
+    public BasicMembership(int bonusPointBalance){
+        super(bonusPointBalance);
+        membershipName = getMembershipName();
+    }
+
     //metoden tar med inn som parameter gjeldende bonuspoeng-saldo, og poengene som
     //skal registreres. Metoden beregner så ny saldo basert på fordelene i gitt medlemskap.
     //Den nye saldoen blir så returnert.
@@ -18,6 +24,7 @@ public class BasicMembership extends Membership {
       return this.bonusPointBalance;
     }
 
+    @Override
     public int getBonusPointBalance() {
         return bonusPointBalance;
     }

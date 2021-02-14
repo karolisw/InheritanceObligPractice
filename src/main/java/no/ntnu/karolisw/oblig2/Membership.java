@@ -8,6 +8,11 @@ public abstract class Membership {
     protected abstract int registerPoints(int bonusPointBalance, int newPoints);
     protected abstract String getMembershipName();
 
+    public Membership(int bonusPointBalance){
+        this.bonusPointBalance = bonusPointBalance;
+    }
+
+    public abstract int getBonusPointBalance();
 
     @Override
     public String toString() {

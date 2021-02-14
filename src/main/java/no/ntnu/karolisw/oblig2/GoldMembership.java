@@ -9,24 +9,30 @@ public class GoldMembership extends Membership {
     private final float POINTS_SCALING_FACTOR_LEVEL_1 = 1.3f;
     private final float POINTS_SCALING_FACTOR_LEVEL_2 = 1.5f;
 
-    @Override
-    public int registerPoints(int bonusPointBalance, int newPoints) {
-        if(this.bonusPointBalance >= 75000 && this.bonusPointBalance < 90000){
-            return this.bonusPointBalance = Math.round(bonusPointBalance + newPoints*POINTS_SCALING_FACTOR_LEVEL_1);
-        }
-        else if(bonusPointBalance >= 90000){
-            return this.bonusPointBalance = Math.round(bonusPointBalance + newPoints*POINTS_SCALING_FACTOR_LEVEL_2);
-        }
-        else {
-            throw new IllegalArgumentException("This user is not a gold member");
-        }
+    public GoldMembership(int bonusPointBalance) {
+        super(bonusPointBalance);
+        membershipName = getMembershipName();
     }
 
+    @Override
+    public int registerPoints(int bonusPointBalance, int newPoints) {//this i parametret?????????????????????
+        if(bonusPointBalance >= 75000 && bonusPointBalance < 90000){
+            int newBalance = Math.round(bonusPointBalance + newPoints*POINTS_SCALING_FACTOR_LEVEL_1);
+            setBonusPointBalance(newBalance);
+        }
+        else if(bonusPointBalance >= 90000){
+            int newBalance = Math.round(bonusPointBalance + newPoints*POINTS_SCALING_FACTOR_LEVEL_2);
+            setBonusPointBalance(newBalance);
+        }
+        return this.bonusPointBalance;
+        }
+
+    @Override
     public int getBonusPointBalance() {
         return bonusPointBalance;
     }
 
-    private void setBonusPointBalance(int bonusPointBalance) {
+    public void setBonusPointBalance(int bonusPointBalance) {
         this.bonusPointBalance = bonusPointBalance;
     }
 
