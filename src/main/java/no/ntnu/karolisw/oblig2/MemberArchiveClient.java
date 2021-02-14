@@ -18,7 +18,6 @@ public class MemberArchiveClient {
 
         System.out.println("Member 1 gets 10.000");
         memberArchive.registerPoints(1, 10000);
-        System.out.println(memberArchive.registerPoints(1,10000));
 
         System.out.println("Member 2 gets 10.000");
         memberArchive.registerPoints(2, 10000);
