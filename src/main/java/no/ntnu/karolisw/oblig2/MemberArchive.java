@@ -3,7 +3,6 @@ package no.ntnu.karolisw.oblig2;
 
 import java.time.LocalDate;
 import java.util.HashMap;
-import java.util.Map;
 
 /**
      * The member archive holds all the bonus members. The archive provides

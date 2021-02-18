@@ -2,7 +2,7 @@ package no.ntnu.karolisw.oblig2;
 
 /**
  * A simple client program to test the functionality of the
- * MemberArchive and underlaying classes.
+ * MemberArchive and underlying classes.
  *
  * @author arne
  */
